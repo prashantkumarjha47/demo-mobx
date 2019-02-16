@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { observer, inject } from 'mobx-react'
+import { observable } from 'mobx'
 
+
+@observer
 class App extends Component {
+  @observable text = "hello"
+
+  constructor(props) {
+    super(props)
+    this.props = props
+  }
+
+  componentDidMount() {
+    this.text = "prksh Bhaiya"
+    console.log(this.props);
+
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this.text}
       </div>
     );
   }
 }
 
-export default App;
+export default inject('Store')(App);
